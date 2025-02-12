@@ -45,6 +45,7 @@ input {
     flex: 1;
     margin: var(--spacing-minor);
 }
+
 #addCollection {
     background-color: rgba(76, 297, 80, 0.6);          
     border: none;
@@ -52,7 +53,7 @@ input {
     padding: var(--spacing-major);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    
     font-size: 16px;
     margin: var(--spacing-minor);
     cursor: pointer;
@@ -322,12 +323,13 @@ input {
 }
 #topBar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 2em;
     position: sticky;
     top: 0;
-    z-index: 10; backdrop-filter: blur(8px);
+    z-index: 10; 
+    backdrop-filter: blur(16px);
 }
 
 #supportButton {
@@ -507,10 +509,11 @@ a[href="https://kodar.ninja"]:hover {
     border: none;
     padding: var(--spacing-major);
     cursor: pointer;
-    display: flex;
+    justify-self: flex-start;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 10px;
+    justify-content: center; */
+    margin: var(--spacing-minor)
 }
 
 #syncButton svg {
@@ -581,6 +584,9 @@ a[href="https://kodar.ninja"]:hover {
 #searchBox {
     padding: var(--spacing-major);
     margin: var(--spacing-minor);
+
+    max-width: 70vmin;
+    min-height: 3vmin;
     height: max-content;
     background-color:rgba(255, 255, 255, 0.35);
    

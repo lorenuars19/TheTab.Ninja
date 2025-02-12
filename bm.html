@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheTab.Ninja</title>
     <link rel="stylesheet" href="bm.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 </head>
-<body>
+<body> 
+    
     <div id="leftPane">
-        <div class="pane-toggle" id="toggleLeftPane" title="Open/Close settings">☰</div>
+       
+        <div class="pane-toggle" id="toggleLeftPane" title="Open/Close settings">
+            <i class="fa fa-bars"></i>
+           
+        </div>
+        
         <div id="settings">        
             <a href="https://kodar.ninja" target="_blank">Created by Kodar.Ninja</a>
             <br>
@@ -22,6 +29,7 @@
                 <input type="checkbox" id="darkMode"> Dark mode
             </label>
             <h3>GitHub Sync Settings</h3>
+            
             <input type="text" id="githubUsername" placeholder="GitHub Username">
             <input type="text" id="githubRepo" placeholder="Repository Name">
             <input type="password" id="githubPat" placeholder="Personal Access Token">
@@ -31,6 +39,7 @@
                    ❓ How do I create a GitHub Personal Access Token?
                 </a>
             </div>
+            
             <hr>
             <h3>Import/Export</h3>
             <button id="exportButton" class="import-button">Export Bookmarks</button>
@@ -61,21 +70,19 @@
     </div>
     <div id="bookmarkManager">
         <div id="topBar">
-            <div>
-                <button id="syncButton" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 12c0-4.4 3.6-8 8-8 3.4 0 6.3 2.1 7.4 5M22 12c0 4.4-3.6 8-8 8-3.4 0-6.3-2.1-7.4-5"/>
-                    </svg>
-                </button>
-                <button id="addCollection">Add Collection</button>
-            </div>       
+            <button id="syncButton" style="display: none;">
+                <i class="fa fa-refresh"></i>
+            </button>
+            <button id="addCollection">Add Collection</button>     
             <input type="text" id="searchBox" placeholder="Search Collections/Bookmarks (#collections, %all, |or) #blue|red">
             <a href="https://buymeacoffee.com/kodar.ninja" target="_blank" id="supportButton">Support dev with a ☕</a>
         </div>
         <div id="collections"></div>
     </div>
     <div id="rightPane">
-        <div class="pane-toggle" id="toggleRightPane" title="Open/Close Chrome Tabs-list">☰</div>        
+        <div class="pane-toggle" id="toggleRightPane" title="Open/Close Chrome Tabs-list">
+            <i class="fa fa-bars"></i>
+        </div>        
         <div id="content"></div>
     </div>
     
