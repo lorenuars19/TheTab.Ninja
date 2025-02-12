@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheTab.Ninja</title>
     <style>
+     
+
+
+        * {
+            border-radius: 0.4em;
+            /* DEBUG */
+            /* padding: 4px; 
+            border: red 1px solid; */
+        }
         body {
             font-family: Arial, sans-serif;
             background-image: url('');
@@ -13,9 +22,15 @@
             background-attachment: fixed;
             background-size: cover; /* Välj 'cover' eller 'contain' */
             margin: 0;
-            padding: 20px;
+            padding: 0.4em;
             display: flex;
             transition: background-color 0.3s, color 0.3s;
+        }
+        input {
+            border: 1px solid grey;
+            background: hsla(0, 0, 50%, 0.2);
+            padding: 0.4em;
+            margin: 0.4em;
         }
         #leftPane, #rightPane {
             width: 250px;
@@ -41,7 +56,6 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
-            border-radius: 4px;
             transition: background-color 0.3s;
         }
         #addCollection:hover {
@@ -76,7 +90,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border-radius: 4px;
             transition: transform 0.2s ease, opacity 0.2s ease;
             will-change: transform, opacity;
         }
@@ -127,18 +140,20 @@
             padding: 5px 10px;
             margin-right: 10px;
             background-color: #e0e0e0;
-            border-radius: 4px;
             color: #333; /* Mörk färg för ljust läge */
         }
 
-        body.dark-mode .drag-handle {
+        @media (prefers-color-scheme: dark) {
+            .drag-handle {
             background-color: #444; /* Mörkare bakgrund för mörkt läge */
             color: #ddd; /* Ljusare text för mörkt läge */
-        }
-        .dragging {
+            }
+            .dragging {
             opacity: 0.3;
             transform: scale(0.95);
+            }
         }
+        
         .collection-actions {
             display: flex;
             gap: 5px;
@@ -152,7 +167,6 @@
             padding: 5px 10px;
             cursor: pointer;
             border: none;
-            border-radius: 4px;
             font-size: 14px;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -174,13 +188,15 @@
             transform: rotate(180deg);
         }
 
-        body.dark-mode .toggle-collection {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 0 10px;
-            color: #fff; /* Ljus färg för mörkt läge */
+        @media (prefers-color-scheme: dark) {
+            .toggle-collection {
+                background: none;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 0 10px;
+                color: #fff; /* Ljus färg för mörkt läge */
+            }
         }
         .add-bookmark {
             background-color: #4CAF50;
@@ -217,7 +233,6 @@
             border: 2px dashed #ccc;
             margin-top: 10px;
             width: 100%;
-            border-radius: 4px;
         }
         .drag-over {
             background-color: #e0e0e0;
@@ -228,7 +243,6 @@
             padding: 10px;
             background-color: #f0f0f0;
             margin-bottom: 5px;
-            border-radius: 4px;
         }
         .tabs-list {
             display: flex;
@@ -257,13 +271,11 @@
             padding: 10px;
             background-color: rgba(240, 240, 240, 0.3);
             backdrop-filter: blur(8px);
-            border-radius: 5px;
         }
         .pane-toggle {
             cursor: pointer;
             padding: 5px;
             background-color: rgba(240, 240, 240, 0.3);
-            border-radius: 4px;
             margin-bottom: 10px;
         }
         .bookmark.drag-over {
@@ -275,33 +287,35 @@
             opacity: 0.5;
             transform: scale(0.98);
         }
-        body.dark-mode {
-            /*background-color: rgba(26, 26, 26, 0.3);*/
-            color: #ffffff;
-            background-color: #333;
-        }
-        body.dark-mode .collection {
-            background-color: rgba(42, 42, 42, 0.3);
-            border-color: rgba(4, 4, 4, 0.3);
-        }
-        body.dark-mode .bookmark {
-            background-color: rgba(3, 3, 3, 0.3);
-            border-color: rgba(5, 5, 5, 0.3);
-        }
-        body.dark-mode .window-title,
-        body.dark-mode #settings,
-        body.dark-mode .pane-toggle {
-            background-color: rgba(42, 42, 42, 0.6);
-        }
-        body.dark-mode .collection-button {
-            background-color: rgba(4, 4, 4, 0.6);
-            color: #fff;
-        }
-        body.dark-mode .add-bookmark {
-            background-color: #2e7d32;
-        }
-        body.dark-mode .delete-collection {
-            background-color: #c62828;
+        @media (prefers-color-scheme: dark) {
+            body {
+                /*background-color: rgba(26, 26, 26, 0.3);*/
+                color: #ffffff;
+                background-color: #333;
+            }
+            .collection {
+                background-color: rgba(42, 42, 42, 0.3);
+                border-color: rgba(4, 4, 4, 0.3);
+            }
+            .bookmark {
+                background-color: rgba(3, 3, 3, 0.3);
+                border-color: rgba(5, 5, 5, 0.3);
+            }
+            .window-title,
+            #settings,
+            .pane-toggle {
+                background-color: rgba(42, 42, 42, 0.6);
+            }
+            .collection-button {
+                background-color: rgba(4, 4, 4, 0.6);
+                color: #fff;
+            }
+            .add-bookmark {
+                background-color: #2e7d32;
+            }
+            .delete-collection {
+                background-color: #c62828;
+            }
         }
         .hidden {
             display: none !important;
@@ -324,30 +338,27 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
-            border-radius: 4px;
             transition: background-color 0.3s;
         }
 
         #supportButton:hover {
             background-color: #E56E2E;
         }
-
-        body.dark-mode #supportButton {
-            background-color: rgba(255, 155, 94, 0.3);
-            color: #1a1a1a;
+        @media (prefers-color-scheme: dark) {
+            #supportButton {
+                background-color: rgba(255, 155, 94, 0.3);
+                color: #1a1a1a;
+            }
+            #supportButton:hover {
+                background-color: rgba(255, 179, 129, 0.3);
+            }
         }
-
-        body.dark-mode #supportButton:hover {
-            background-color: rgba(255, 179, 129, 0.3);
-        }
-
         .import-button {
             display: inline-block;
             padding: 10px 15px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
             margin: 5px; /* Lägg till marginaler */
@@ -360,13 +371,14 @@
         .delete-button:hover {
             background-color: #d32f2f; /* Mörkare röd vid hover */
         }
+        @media (prefers-color-scheme: dark) {
+            .delete-button {
+                background-color: #c62828; /* Mörkare röd i dark mode */
+            }
 
-        body.dark-mode .delete-button {
-            background-color: #c62828; /* Mörkare röd i dark mode */
-        }
-
-        body.dark-mode .delete-button:hover {
-            background-color: #b71c1c; /* Ännu mörkare röd vid hover i dark mode */
+            .delete-button:hover {
+                background-color: #b71c1c; /* Ännu mörkare röd vid hover i dark mode */
+            }
         }
         .import-button:hover {
             background-color: #45a049;
@@ -392,25 +404,26 @@
         }
 
         /* Styles for the link in dark mode */
-        body.dark-mode a[href="https://kodar.ninja"] {
-            color: #66b3ff; /* Light blue color for better visibility in dark mode */
-        }
+        @media (prefers-color-scheme: dark) {
+            a[href="https://kodar.ninja"] {
+                color: #66b3ff; /* Light blue color for better visibility in dark mode */
+            }
 
-        body.dark-mode a[href="https://kodar.ninja"]:hover {
-            color: #99ccff; /* Slightly lighter blue on hover in dark mode */
+            a[href="https://kodar.ninja"]:hover {
+                color: #99ccff; /* Slightly lighter blue on hover in dark mode */
+            }
         }
-
         .placeholder {
             background: rgba(100, 100, 100, 0.2);
             border: 2px dashed #666;
             margin: 5px 0;
-            border-radius: 4px;
             transition: all 0.15s ease;
         }
-
-        body.dark-mode .placeholder {
-            border-color: #666;
-            background-color: rgba(255, 255, 255, 0.05);
+        @media (prefers-color-scheme: dark) {
+                .placeholder {
+                border-color: #666;
+                background-color: rgba(255, 255, 255, 0.05);
+            }
         }
 
         .collection {
@@ -419,7 +432,6 @@
             padding: 10px;
             background: rgba(255, 255, 255, 0.35);
             backdrop-filter: blur(8px);
-            border-radius: 8px; /* Uppdaterat från 4px */
             transition: all 0.3s ease; /* Uppdaterad från ingen transition */
         }
 
@@ -448,25 +460,27 @@
             border-color: #999;
         }
 
-        body.dark-mode .collection.is-open {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
-                        0 8px 16px rgba(0, 0, 0, 0.2);
-            border-color: #555;
-            transform: translateY(-2px);
-            background: rgba(42, 42, 42, 0.35);
-            /*background-color: #2a2a2a;*/
-        }
+        @media (prefers-color-scheme: dark) {
+            .collection.is-open {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
+                            0 8px 16px rgba(0, 0, 0, 0.2);
+                border-color: #555;
+                transform: translateY(-2px);
+                background: rgba(42, 42, 42, 0.35);
+                /*background-color: #2a2a2a;*/
+            }
 
-        body.dark-mode .collection:not(.is-open) {
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                        inset 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-            background: rgba(21, 21, 21, 0.35);
-            /*background-color: #151515;*/
-        }
+            .collection:not(.is-open) {
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                            inset 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: translateY(-2px);
+                background: rgba(21, 21, 21, 0.35);
+                /*background-color: #151515;*/
+            }
 
-        body.dark-mode .collection:hover {
-            border-color: #666;            
+            .collection:hover {
+                border-color: #666;            
+            }
         }
 
         /* GitHub sync styles - lägg till i style-taggen */
@@ -481,7 +495,6 @@
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ddd;
-            border-radius: 4px;
         }
 
         #syncButton {
@@ -490,7 +503,6 @@
             color: white;
             border: none;
             padding: 10px;
-            border-radius: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -519,25 +531,26 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        @media (prefers-color-scheme: dark) {
+            #githubSettings {
+                border-color: #444;
+            }
 
-        body.dark-mode #githubSettings {
-            border-color: #444;
-        }
+            #githubSettings input {
+                background-color: #333;
+                border-color: #555;
+                color: white;
+            }
 
-        body.dark-mode #githubSettings input {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
+            #syncButton {
+                background-color: rgba(35, 134, 54, 0.35);
+                backdrop-filter: blur(8px);
+            }
 
-        body.dark-mode #syncButton {
-            background-color: rgba(35, 134, 54, 0.35);
-            backdrop-filter: blur(8px);
-        }
-
-        body.dark-mode #syncButton.syncing {
-            background-color: rgba(26, 97, 39, 0.35);
-            backdrop-filter: blur(8px);
+            #syncButton.syncing {
+                background-color: rgba(26, 97, 39, 0.35);
+                backdrop-filter: blur(8px);
+            }
         }
 
         .help-link-container {
@@ -563,9 +576,9 @@
         }
        
         #searchBox {
-            padding: 8px;
-            width: 300px; 
-            height: 28px; 
+            padding: 0.4em;
+            margin: 0.4em;
+            height: 2.4em; 
             position: fixed;
             top: 20px;            /* Avståndet från toppen – justera efter behov */
             left: 50%;            /* Placera mitt i fönstret horisontellt */
@@ -575,7 +588,7 @@
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            width: calc(80% - 800px); /* 120px reserverat för sidorna */
+            width: calc(80% - 800px); 120px reserverat för sidorna
         }
 
         @media (max-width: 1024px) {
@@ -583,13 +596,15 @@
                 display: none;
             }
         }
-
-        body.dark-mode #searchBox {
-            background-color:rgba(3, 3, 3, 0.65);
-            color: white;
-            border-color: #555;
-            backdrop-filter: blur(8px);
+        @media (prefers-color-scheme: dark) {
+            #searchBox {
+                background-color:rgba(3, 3, 3, 0.65);
+                color: white;
+                border-color: #555;
+                backdrop-filter: blur(8px);
+            }
         }
+
         #backgroundThumbnails {
             display: flex; /* Eller 'grid' för mer avancerad layout */
             flex-wrap: wrap; /* Om miniatyrerna ska radbrytas */
@@ -601,7 +616,6 @@
             width: 50px; /* Justera storleken efter behov */
             height: 50px;
             border: 2px solid transparent; /* Tunn ram som standard */
-            border-radius: 4px;
             cursor: pointer;
             object-fit: cover; /* Se till att bilden täcker miniatyr-ytan */
             transition: border-color 0.3s; /* Mjuk övergång för border-color */
@@ -617,7 +631,6 @@
             padding: 10px;
             cursor: move;
             margin-bottom: 10px;
-            border-radius: 8px;
             backdrop-filter: blur(8px);
             margin-top: 10px;
         }
@@ -657,7 +670,6 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
             padding: 4px 8px;
             cursor: pointer;
             font-size: 12px;
