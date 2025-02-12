@@ -11,8 +11,8 @@
 * {
     border-radius: 0.4em;
     /* DEBUG */
-    /* padding: var(--spacing-maj); 
-    border: red 1px solid; */
+    padding: var(--spacing-maj); 
+    border: red 1px solid;
 }
 body {
     font-family: Arial, sans-serif;
@@ -33,7 +33,7 @@ input {
     margin: var(--spacing-minor);
 }
 #leftPane, #rightPane {
-    width: 250px;
+    width: 16vmax;
     transition: width 0.3s;
     overflow: hidden;
 }
@@ -324,7 +324,10 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 2em;
+    position: sticky;
+    top: 0;
+    z-index: 10; backdrop-filter: blur(8px);
 }
 
 #supportButton {
@@ -578,17 +581,10 @@ a[href="https://kodar.ninja"]:hover {
 #searchBox {
     padding: var(--spacing-major);
     margin: var(--spacing-minor);
-    height: 2.4em; 
-    position: fixed;
-    top: 20px;            /* Avståndet från toppen – justera efter behov */
-    left: 50%;            /* Placera mitt i fönstret horisontellt */
-    transform: translateX(-50%);  /* Justera för att centra elementet exakt */
-    z-index: 1000;        /* Se till att sökrutan ligger över andra element */
+    height: max-content;
     background-color:rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    width: calc(80% - 800px); 120px reserverat för sidorna
+   
+    flex-grow: 2;
 }
 
 @media (max-width: 1024px) {
@@ -678,4 +674,3 @@ a[href="https://kodar.ninja"]:hover {
 .group-header:hover .create-collection-btn {
     display: inline-block;
 }
-</style>

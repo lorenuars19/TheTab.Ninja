@@ -12,7 +12,15 @@
         <div class="pane-toggle" id="toggleLeftPane" title="Open/Close settings">☰</div>
         <div id="settings">        
             <a href="https://kodar.ninja" target="_blank">Created by Kodar.Ninja</a>
-            <br><br>
+            <br>
+            <h3>Settings</h3>
+            <label>
+                <input type="checkbox" id="openInNewTab"> Open links in new tab
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" id="darkMode"> Dark mode
+            </label>
             <h3>GitHub Sync Settings</h3>
             <input type="text" id="githubUsername" placeholder="GitHub Username">
             <input type="text" id="githubRepo" placeholder="Repository Name">
@@ -38,14 +46,7 @@
             <button id="deleteAllButton" class="import-button delete-button">Delete All</button> <!-- Ny knapp -->
             <br><br>
             <hr>
-            <h3>Settings</h3>
-            <label>
-                <input type="checkbox" id="openInNewTab"> Open bookmarks in new tab
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" id="darkMode"> Dark mode
-            </label>
+            
             <br>
             <div id="mysettings">
                 <h3>Wallpaper</h3>
@@ -60,7 +61,7 @@
     </div>
     <div id="bookmarkManager">
         <div id="topBar">
-            <div style="display: flex; align-items: center;">
+            <div>
                 <button id="syncButton" style="display: none;">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21.5 2v6h-6M2.5 22v-6h6M2 12c0-4.4 3.6-8 8-8 3.4 0 6.3 2.1 7.4 5M22 12c0 4.4-3.6 8-8 8-3.4 0-6.3-2.1-7.4-5"/>
