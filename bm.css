@@ -1,0 +1,681 @@
+
+:root {
+    --spacing-major: 0.4em;
+    --spacing-minor: 0.2em;
+
+    --col-bg: hsl(0,0,90%);
+    --col-bg-dark: hsl(0,0,10%);
+}
+
+
+* {
+    border-radius: 0.4em;
+    /* DEBUG */
+    /* padding: var(--spacing-maj); 
+    border: red 1px solid; */
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover; /* Välj 'cover' eller 'contain' */
+    margin: var(--spacing-minor);
+    padding: var(--spacing-major);
+    display: flex;
+    transition: background-color 0.3s, color 0.3s;
+}
+input {
+    border: 1px solid grey;
+    background: hsla(0, 0, 50%, 0.2);
+    padding: var(--spacing-major);
+    margin: var(--spacing-minor);
+}
+#leftPane, #rightPane {
+    width: 250px;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+#leftPane.closed, #rightPane.closed {
+    width: 30px;
+}
+
+#bookmarkManager {
+    flex: 1;
+    margin: var(--spacing-minor);
+}
+#addCollection {
+    background-color: rgba(76, 297, 80, 0.6);          
+    border: none;
+    color: white;
+    padding: var(--spacing-major);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: var(--spacing-minor);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#addCollection:hover {
+    background-color: #45a049;
+}
+
+.collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.collection-title-area {
+    display: flex;
+    align-items: center;
+}
+.bookmarks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+}
+.bookmark {
+    border: 1px solid #ddd;
+    padding: var(--spacing-major);
+    width: 133px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    will-change: transform, opacity;
+}
+.bookmark:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.bookmark img {
+    max-width: 32px;
+    max-height: 32px;
+    object-fit: contain;
+}
+.bookmark h3 {
+    margin: var(--spacing-minor);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.bookmark p {
+    font-size: 10px;
+    margin: var(--spacing-minor);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.bookmark .edit-icon,
+.bookmark .delete-icon {
+    position: absolute;
+    bottom: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.bookmark .edit-icon {
+    right: 25px;
+}
+.bookmark .delete-icon {
+    right: 5px;
+}
+.bookmark:hover .edit-icon,
+.bookmark:hover .delete-icon {
+    opacity: 1;
+}
+.drag-handle {
+    cursor: move;
+    padding: var(--spacing-major);
+    margin-right: 10px;
+    background-color: #e0e0e0;
+    color: #333; /* Mörk färg för ljust läge */
+}
+
+@media (prefers-color-scheme: dark) {
+    .drag-handle {
+    background-color: #444; /* Mörkare bakgrund för mörkt läge */
+    color: #ddd; /* Ljusare text för mörkt läge */
+    }
+    .dragging {
+    opacity: 0.3;
+    transform: scale(0.95);
+    }
+}
+
+.collection-actions {
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.collection:hover .collection-actions {
+    opacity: 1;
+}
+.collection-button {
+    padding: var(--spacing-major);
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.toggle-collection {
+    color: #333;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: var(--spacing-major);
+    transition: transform 0.3s ease; /* NY egenskap */
+}
+
+.collection.is-open .toggle-collection {
+    transform: rotate(0deg);
+}
+
+.collection:not(.is-open) .toggle-collection {
+    transform: rotate(180deg);
+}
+
+@media (prefers-color-scheme: dark) {
+    .toggle-collection {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        padding: var(--spacing-major);
+        color: #fff; /* Ljus färg för mörkt läge */
+    }
+}
+.add-bookmark {
+    background-color: #4CAF50;
+    color: white;
+}
+.add-bookmark:hover {
+    background-color: #45a049;
+}
+.edit-collection {
+    background-color: #555555;
+    color: white;
+}
+.edit-collection:hover {
+    background-color: #444444;
+}
+.move-collection {
+    background-color: #f0f0f0;
+    color: #333;
+}
+.move-collection:hover {
+    background-color: #e0e0e0;
+}
+.delete-collection {
+    background-color: #f44336;
+    color: white;
+}
+.delete-collection:hover {
+    background-color: #da190b;
+}
+.empty-collection-message {
+    padding: var(--spacing-major);
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+    margin-top: 10px;
+    width: 100%;
+}
+.drag-over {
+    background-color: #e0e0e0;
+    border: 2px dashed #666;
+}
+.window-title {
+    cursor: pointer;
+    padding: var(--spacing-major);
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+}
+.tabs-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    white-space: normal;
+}
+.tab {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-major);
+    cursor: move;
+}
+.tab img {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+.tab-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#settings {
+    margin-bottom: 20px;
+    padding: var(--spacing-major);
+    background-color: rgba(240, 240, 240, 0.3);
+    backdrop-filter: blur(8px);
+}
+.pane-toggle {
+    cursor: pointer;
+    padding: var(--spacing-major);
+    background-color: rgba(240, 240, 240, 0.3);
+    margin-bottom: 10px;
+}
+.bookmark.drag-over {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+.bookmark.dragging {
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        /*background-color: rgba(26, 26, 26, 0.3);*/
+        color: #ffffff;
+        background-color: #333;
+    }
+    .collection {
+        background-color: rgba(42, 42, 42, 0.3);
+        border-color: rgba(4, 4, 4, 0.3);
+    }
+    .bookmark {
+        background-color: rgba(3, 3, 3, 0.3);
+        border-color: rgba(5, 5, 5, 0.3);
+    }
+    .window-title,
+    #settings,
+    .pane-toggle {
+        background-color: rgba(42, 42, 42, 0.6);
+    }
+    .collection-button {
+        background-color: rgba(4, 4, 4, 0.6);
+        color: #fff;
+    }
+    .add-bookmark {
+        background-color: #2e7d32;
+    }
+    .delete-collection {
+        background-color: #c62828;
+    }
+}
+.hidden {
+    display: none !important;
+}
+#topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#supportButton {
+    background-color: rgba(255, 129, 63, 0.3);
+    color: white;
+    border: none;
+    padding: var(--spacing-major);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: var(--spacing-minor);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#supportButton:hover {
+    background-color: #E56E2E;
+}
+@media (prefers-color-scheme: dark) {
+    #supportButton {
+        background-color: rgba(255, 155, 94, 0.3);
+        color: #1a1a1a;
+    }
+    #supportButton:hover {
+        background-color: rgba(255, 179, 129, 0.3);
+    }
+}
+.import-button {
+    display: inline-block;
+    padding: var(--spacing-major);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: var(--spacing-minor); /* Lägg till marginaler */
+}
+
+.delete-button {
+    background-color: #f44336; /* Röd färg för delete-knappen */
+}
+
+.delete-button:hover {
+    background-color: #d32f2f; /* Mörkare röd vid hover */
+}
+@media (prefers-color-scheme: dark) {
+    .delete-button {
+        background-color: #c62828; /* Mörkare röd i dark mode */
+    }
+
+    .delete-button:hover {
+        background-color: #b71c1c; /* Ännu mörkare röd vid hover i dark mode */
+    }
+}
+.import-button:hover {
+    background-color: #45a049;
+}
+
+body.dark-mode .import-button {
+    background-color: #2e7d32;
+}
+
+body.dark-mode .import-button:hover {
+    background-color: #1b5e20;
+}
+
+a[href="https://kodar.ninja"] {
+    color: #0066cc; /* A standard blue color for links */
+    text-decoration: none; /* Removes the underline */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+a[href="https://kodar.ninja"]:hover {
+    color: #004499; /* Slightly darker blue on hover */
+    text-decoration: underline; /* Adds underline on hover */
+}
+
+/* Styles for the link in dark mode */
+@media (prefers-color-scheme: dark) {
+    a[href="https://kodar.ninja"] {
+        color: #66b3ff; /* Light blue color for better visibility in dark mode */
+    }
+
+    a[href="https://kodar.ninja"]:hover {
+        color: #99ccff; /* Slightly lighter blue on hover in dark mode */
+    }
+}
+.placeholder {
+    background: rgba(100, 100, 100, 0.2);
+    border: 2px dashed #666;
+    margin: var(--spacing-minor);
+    transition: all 0.15s ease;
+}
+@media (prefers-color-scheme: dark) {
+        .placeholder {
+        border-color: #666;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.collection {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: var(--spacing-major);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease; /* Uppdaterad från ingen transition */
+}
+
+.collection.dragging {
+    opacity: 0.5;
+    transform: scale(0.98);
+}   
+
+.collection.is-open {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+                0 8px 16px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: #bbb;
+}
+
+.collection:not(.is-open) {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 4px 8px rgba(0, 0, 0, 0.05);
+    transform: translateY(1px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.collection:hover {
+    border-color: #999;
+}
+
+@media (prefers-color-scheme: dark) {
+    .collection.is-open {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
+                    0 8px 16px rgba(0, 0, 0, 0.2);
+        border-color: #555;
+        transform: translateY(-2px);
+        background: rgba(42, 42, 42, 0.35);
+        /*background-color: #2a2a2a;*/
+    }
+
+    .collection:not(.is-open) {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                    inset 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        background: rgba(21, 21, 21, 0.35);
+        /*background-color: #151515;*/
+    }
+
+    .collection:hover {
+        border-color: #666;            
+    }
+}
+
+/* GitHub sync styles - lägg till i style-taggen */
+#githubSettings {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+#githubSettings input {
+    width: 100%;
+    padding: var(--spacing-major);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+#syncButton {
+    background-color: rgba(46, 164, 79, 0.35) ;
+    backdrop-filter: blur(8px);
+    color: white;
+    border: none;
+    padding: var(--spacing-major);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+#syncButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+#syncButton.syncing {
+    background-color: rgba(46, 164, 79, 0.35);
+    backdrop-filter: blur(8px);
+
+    background-color: #238636;
+    pointer-events: none;
+}
+
+#syncButton.syncing svg {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@media (prefers-color-scheme: dark) {
+    #githubSettings {
+        border-color: #444;
+    }
+
+    #githubSettings input {
+        background-color: #333;
+        border-color: #555;
+        color: white;
+    }
+
+    #syncButton {
+        background-color: rgba(35, 134, 54, 0.35);
+        backdrop-filter: blur(8px);
+    }
+
+    #syncButton.syncing {
+        background-color: rgba(26, 97, 39, 0.35);
+        backdrop-filter: blur(8px);
+    }
+}
+
+.help-link-container {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #0366d6;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.help-link:hover {
+    text-decoration: underline;
+}
+
+.help-link i {
+    font-size: 16px;
+}
+
+#searchBox {
+    padding: var(--spacing-major);
+    margin: var(--spacing-minor);
+    height: 2.4em; 
+    position: fixed;
+    top: 20px;            /* Avståndet från toppen – justera efter behov */
+    left: 50%;            /* Placera mitt i fönstret horisontellt */
+    transform: translateX(-50%);  /* Justera för att centra elementet exakt */
+    z-index: 1000;        /* Se till att sökrutan ligger över andra element */
+    background-color:rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    width: calc(80% - 800px); 120px reserverat för sidorna
+}
+
+@media (max-width: 1024px) {
+    #searchBox {
+        display: none;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    #searchBox {
+        background-color:rgba(3, 3, 3, 0.65);
+        color: white;
+        border-color: #555;
+        backdrop-filter: blur(8px);
+    }
+}
+
+#backgroundThumbnails {
+    display: flex; /* Eller 'grid' för mer avancerad layout */
+    flex-wrap: wrap; /* Om miniatyrerna ska radbrytas */
+    gap: 10px; /* Mellanrum mellan miniatyrerna */
+    margin-top: 10px;
+}
+
+.background-thumbnail {
+    width: 50px; /* Justera storleken efter behov */
+    height: 50px;
+    border: 2px solid transparent; /* Tunn ram som standard */
+    cursor: pointer;
+    object-fit: cover; /* Se till att bilden täcker miniatyr-ytan */
+    transition: border-color 0.3s; /* Mjuk övergång för border-color */
+}
+
+.background-thumbnail:hover,
+.background-thumbnail.selected {
+    border-color: #007bff; /* Exempel på färg för markerad/hover */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Valfri skuggeffekt */
+}
+
+.tab-group-container {
+    padding: var(--spacing-major);
+    cursor: move;
+    margin-bottom: 10px;
+    backdrop-filter: blur(8px);
+    margin-top: 10px;
+}
+
+.group-drag-handle{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.group-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.group-tabs {
+    display: flex;
+    flex-direction: column; /* Varje tabb på en egen rad */
+    white-space: nowrap;
+    gap: 10px;
+}
+
+.ungrouped-tabs {
+    display: flex;
+    flex-direction: column; /* Varje tabb på en egen rad */
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.create-collection-btn {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: var(--spacing-major);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.group-header:hover .create-collection-btn {
+    display: inline-block;
+}
+</style>
