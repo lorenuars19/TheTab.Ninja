@@ -164,6 +164,8 @@ input[type=text], input[type=password]{
 .bookmarks {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
     gap: var(--spacing-major);
     min-height: 2em;
 }
@@ -171,7 +173,7 @@ input[type=text], input[type=password]{
     border: 1px solid;
     border-color: var(--fg-li-border);
     padding: var(--spacing-major);
-    min-width: 6vw;
+    min-width: 2em;
     min-height: 8vh;
     background-color: var(--bg-li-ba);
     backdrop-filter: blur(1px);
@@ -179,7 +181,7 @@ input[type=text], input[type=password]{
     cursor: pointer;
     overflow: hidden;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: stretch;
     transition: transform 0.2s ease, opacity 0.2s ease;
