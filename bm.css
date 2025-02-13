@@ -23,6 +23,7 @@
     --hu-di : 50deg;
     --hu-btn: 120deg;
     --tr     : 20%;
+
     /* background light */
     --bg-li-ac: hsla(var(--hu-ac), 60%, 98%);
     --bg-li-ba: hsla(var(--hu-ba), 40%, 90%);
@@ -34,6 +35,7 @@
     --fg-li-di: hsla(var(--hu-di), 10%, 40%);
     --fg-li-tr: hsla(var(--hu-di), 60%, 80%, var(--tr));
     --fg-li-border: hsl(var(--hu-ac), 10%, 40%);
+
     /* background dark */
     --bg-da-ba: hsla(var(--hu-ba), 60%, 10%);
     --bg-da-ac: hsla(var(--hu-di), 40%, 20%);
@@ -47,13 +49,13 @@
     --fg-da-border: hsl(var(--hu-ac), 10%, 60%);
 
     /* btn light */
-    --btn-li-ba   : hsla(var(--hu-btn), 80%, 60%, 100%);
-    --btn-li-hover: hsla(var(--hu-btn), 40%, 40%, 100%);
-    --btn-li-text  : hsla(var(var(--hu-btn)), 10%, 80%, 100%);
+    --btn-li-ba   : hsl(var(--hu-btn), 80%, 60%);
+    --btn-li-hover: hsl(var(--hu-btn), 40%, 40%);
+    --btn-li-text  : hsla(var(--hu-btn), 10%, 100%);
     /* btn dark */
-    --btn-da-ba   : hsla(var(--hu-btn), 80%, 40%, 100%);
-    --btn-da-hover: hsla(var(--hu-btn), 40%, 60%, 100%);
-    --btn-da-text : hsla(var(var(--hu-btn)), 10%, 80%, 100%);
+    --btn-da-ba   : hsl(var(--hu-btn), 80%, 40%);
+    --btn-da-hover: hsl(var(--hu-btn), 40%, 60%);
+    --btn-da-text : hsl(var(--hu-btn), 10%, 100%);
 }
 
 
@@ -111,7 +113,7 @@ input[type=text], input[type=password]{
     } 
 }
 #leftPane, #rightPane {
-    width: 12vw;
+    width: 16vw;
     transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     overflow: hidden;
 }
@@ -131,8 +133,8 @@ input[type=text], input[type=password]{
     padding: var(--spacing-major);
     text-align: center;
     text-decoration: none;
-    
     font-size: 16px;
+
     margin: var(--spacing-minor);
     cursor: pointer;
     transition: background-color 0.3s;
@@ -149,12 +151,11 @@ input[type=text], input[type=password]{
     }
 }
 
-
 .collection-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: var(--spacing-major);
 }
 .collection-title-area {
     display: flex;
@@ -163,21 +164,24 @@ input[type=text], input[type=password]{
 .bookmarks {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    min-height: 50px;
+    gap: var(--spacing-major);
+    min-height: 2em;
 }
 .bookmark {
-    border: 1px solid #ddd;
+    border: 1px solid;
+    border-color: var(--fg-li-border);
     padding: var(--spacing-major);
-    width: 133px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.1);
+    min-width: 6vw;
+    min-height: 8vh;
+    background-color: var(--bg-li-ba);
     backdrop-filter: blur(1px);
     position: relative;
     cursor: pointer;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
     transition: transform 0.2s ease, opacity 0.2s ease;
     will-change: transform, opacity;
 }
@@ -185,19 +189,20 @@ input[type=text], input[type=password]{
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 .bookmark img {
-    max-width: 32px;
-    max-height: 32px;
+    max-width: 2em;
+    max-height: 2em;
     object-fit: contain;
+    aspect-ratio: 1 / 1;
 }
 .bookmark h3 {
     margin: var(--spacing-minor);
-    font-size: 12px;
+    font-size: 1em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .bookmark p {
-    font-size: 10px;
+    font-size: 0.8em;
     margin: var(--spacing-minor);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -213,10 +218,10 @@ input[type=text], input[type=password]{
     transition: opacity 0.3s;
 }
 .bookmark .edit-icon {
-    right: 25px;
+    right: 2em;
 }
 .bookmark .delete-icon {
-    right: 5px;
+    right: 1em;
 }
 .bookmark:hover .edit-icon,
 .bookmark:hover .delete-icon {
@@ -226,14 +231,16 @@ input[type=text], input[type=password]{
     cursor: move;
     padding: var(--spacing-major);
     margin-right: 10px;
-    background-color: #e0e0e0;
-    color: #333; /* Mörk färg för ljust läge */
+    background-color: var(--fg-li-ac);
+    color: var(--bg-li-ba); /* Mörk färg för ljust läge */
+    border: var(--fg-li-border);
 }
 
 @media (prefers-color-scheme: dark) {
     .drag-handle {
-    background-color: #444; /* Mörkare bakgrund för mörkt läge */
-    color: #ddd; /* Ljusare text för mörkt läge */
+    background-color: var(--bg-da-ba); /* Mörkare bakgrund för mörkt läge */
+    color: var(--fg-li-ba); /* Ljusare text för mörkt läge */
+    border: var(--fg-li-border);
     }
     .dragging {
     opacity: 0.3;
@@ -378,8 +385,8 @@ input[type=text], input[type=password]{
 @media (prefers-color-scheme: dark) {
     body {
         /*background-color: rgba(26, 26, 26, 0.3);*/
-        color: #ffffff;
-        background-color: #333;
+        color: var(--fg-da-ba);
+        background-color: var(--bg-da-ba);
     }
     .collection {
         background-color: rgba(42, 42, 42, 0.3);
@@ -410,7 +417,7 @@ input[type=text], input[type=password]{
 }
 #topBar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 2em;
     position: sticky;

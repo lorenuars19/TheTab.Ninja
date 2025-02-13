@@ -762,12 +762,12 @@ function renderCollections() {
             bookmarkDescription.title = bookmark.description || '';
 
             const editIcon = document.createElement('span');
-            editIcon.className = 'edit-icon';
-            editIcon.textContent = '✏️';
+            editIcon.className = 'edit-icon fa fa-pencil';
+            editIcon.textContent = '';
 
             const deleteIcon = document.createElement('span');
-            deleteIcon.className = 'delete-icon';
-            deleteIcon.textContent = '🗑️';
+            deleteIcon.className = 'delete-icon fa fa-trash';
+            deleteIcon.textContent = '';
 
             bookmarkElement.appendChild(bookmarkIcon);
             bookmarkElement.appendChild(bookmarkTitle);
