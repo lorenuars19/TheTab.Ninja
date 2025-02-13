@@ -603,9 +603,8 @@ function renderCollections() {
         header.className = 'collection-header';
 
         // Drag Handle
-        const dragHandle = document.createElement('span');
-        dragHandle.className = 'drag-handle';
-        dragHandle.textContent = '☰';
+        const dragHandle = document.createElement('i');
+        dragHandle.className = 'fa fa-bars';
         dragHandle.setAttribute('draggable', true);
 
         // Title Area
@@ -627,12 +626,12 @@ function renderCollections() {
 
         // Skapa alla knappar
         const buttons = [
-            { className: 'launch-collection', text: '🚀', title: 'Open all bookmarks as an Chromegroup', action: () => launchCollection(collection.id) },
-            { className: 'fetch-alltabs', text: '📥', title: 'Fetch all open tabs', action: () => fetchAllTabs(collection.id) },
-            { className: 'add-bookmark', text: '+', title: 'Add bookmark', action: () => addBookmark(collection.id) },
-            { className: 'edit-collection', text: '✏️', title: 'Edit collection', action: () => editCollection(collection.id) },
-            { className: 'move-collection', text: '▲', title: 'Move up', action: () => moveCollection(collection.id, -1) },
-            { className: 'move-collection', text: '▼', title: 'Move down', action: () => moveCollection(collection.id, 1) },
+            { className: 'fa fa-external-link ', text: '', title: 'Open all bookmarks as an Chromegroup', action: () => launchCollection(collection.id) },
+            { className: 'fa fa-floppy-o', text: '', title: 'Fetch all open tabs', action: () => fetchAllTabs(collection.id) },
+            { className: 'fa fa-plus', text: '', title: 'Add bookmark', action: () => addBookmark(collection.id) },
+            { className: 'fa fa-pencil', text: '', title: 'Edit collection', action: () => editCollection(collection.id) },
+            { className: 'fa fa-arrow-up', text: '', title: 'Move up', action: () => moveCollection(collection.id, -1) },
+            { className: 'fa fa-arrow-down', text: '', title: 'Move down', action: () => moveCollection(collection.id, 1) },
             { className: 'delete-collection', text: '🗑️', title: 'Delete collection', action: () => deleteCollection(collection.id) }
         ];
 
