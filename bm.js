@@ -6,7 +6,7 @@ let bookmarkManagerData = {
     collections: [],
     openInNewTab: false,
     chromeWindowStates: {},
-    darkMode: false,
+    theme: "system",
     leftPaneOpen: true,
     rightPaneOpen: true,
     githubConfig: {
@@ -551,13 +551,7 @@ function loadFromLocalStorage() {
         }
         
         document.getElementById('openInNewTab').checked = bookmarkManagerData.openInNewTab;
-        document.getElementById('darkMode').checked = bookmarkManagerData.darkMode;
         
-        if (bookmarkManagerData.darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
             
         applyPaneStates();
         console.log('Loaded data from localStorage');
@@ -569,7 +563,7 @@ function loadFromLocalStorage() {
             collections: [],
             openInNewTab: false,
             chromeWindowStates: {},
-            darkMode: false,
+            theme: "system",
             leftPaneOpen: true,
             rightPaneOpen: true,
             githubConfig: {
@@ -617,8 +611,7 @@ function renderCollections() {
 
         // Toggle Button
         const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'toggle-collection';
-        toggleBtn.textContent = collection.isOpen ? '∨' : '∧';
+        toggleBtn.className = 'toggle-collection fa fa-level-up';
 
         // Action Buttons
         const actions = document.createElement('div');
@@ -626,13 +619,13 @@ function renderCollections() {
 
         // Skapa alla knappar
         const buttons = [
-            { className: 'fa fa-external-link ', text: '', title: 'Open all bookmarks as an Chromegroup', action: () => launchCollection(collection.id) },
-            { className: 'fa fa-floppy-o', text: '', title: 'Fetch all open tabs', action: () => fetchAllTabs(collection.id) },
-            { className: 'fa fa-plus', text: '', title: 'Add bookmark', action: () => addBookmark(collection.id) },
-            { className: 'fa fa-pencil', text: '', title: 'Edit collection', action: () => editCollection(collection.id) },
-            { className: 'fa fa-arrow-up', text: '', title: 'Move up', action: () => moveCollection(collection.id, -1) },
-            { className: 'fa fa-arrow-down', text: '', title: 'Move down', action: () => moveCollection(collection.id, 1) },
-            { className: 'delete-collection', text: '🗑️', title: 'Delete collection', action: () => deleteCollection(collection.id) }
+            { className: 'launch-collection fa fa-external-link ', text: '', title: 'Open all bookmarks as an Chromegroup', action: () => launchCollection(collection.id) },
+            { className: 'fetch-alltabs fa fa-rss', text: '', title: 'Fetch all open tabs', action: () => fetchAllTabs(collection.id) },
+            { className: 'add-bookmark fa fa-plus', text: '', title: 'Add bookmark', action: () => addBookmark(collection.id) },
+            { className: 'edit-collection fa fa-pencil', text: '', title: 'Edit collection', action: () => editCollection(collection.id) },
+            { className: 'move-collection fa fa-arrow-up', text: '', title: 'Move up', action: () => moveCollection(collection.id, -1) },
+            { className: 'move-collection fa fa-arrow-down', text: '', title: 'Move down', action: () => moveCollection(collection.id, 1) },
+            { className: 'delete-collection fa fa-trash', text: ' delete', title: 'Delete collection', action: () => deleteCollection(collection.id) }
         ];
 
         buttons.forEach(btnConfig => {
@@ -646,8 +639,8 @@ function renderCollections() {
 
         // Bygg ihop headern
         titleArea.appendChild(dragHandle);
-        titleArea.appendChild(title);
         titleArea.appendChild(toggleBtn);
+        titleArea.appendChild(title);
         header.appendChild(titleArea);
         header.appendChild(actions);
 
@@ -1926,17 +1919,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('openInNewTab').addEventListener('change', (e) => {
         bookmarkManagerData.openInNewTab = e.target.checked;
-        saveToLocalStorage();
-    });
-
-    // Ny uppdaterad dark mode event listener
-    document.getElementById('darkMode').addEventListener('change', (e) => {
-        bookmarkManagerData.darkMode = e.target.checked;
-        if (e.target.checked) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
         saveToLocalStorage();
     });
 
