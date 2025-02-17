@@ -1,123 +1,107 @@
-
 :root {
     --spacing-major: 0.4em;
     --spacing-minor: 0.2em;
+}
 
-    /* 
-    li = light
-    da = dark
-    
-    ba = base
-    ac = accent
-    di = diminished
-    tr = transparent
+@media (prefers-color-scheme: light) {
+    :root {
+        --dimini: hsl(168, 10%, 70%);
+        --delete: hsl(0, 60%, 50%);
+        --delete-hover: hsl(0, 80%, 80%);
+    }
+}
 
-    bg = background
-    fg = foreground
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dimini: hsl(168, 10%, 30%);
+        --delete: hsl(0, 80%, 70%);
+        --delete-hover: hsl(0, 60%, 50%);
+    }
+}
 
-    hu = hue
-    */
+@media (prefers-color-scheme: light) {
+    :root {
+        --text: hsl(168, 30%, 4%);
+        --background: hsl(160, 0%, 96%);
+        --primary: hsl(167, 45%, 53%);
+        --secondary: hsl(167, 54%, 72%);
+        --accent: hsl(167, 64%, 62%);
+    }
+}
 
-    --hu-ac : 70deg;
-    --hu-ba : 60deg;
-    --hu-di : 50deg;
-    --hu-btn: 120deg;
-    --tr     : 20%;
-
-    /* background light */
-    --bg-li-ac: hsla(var(--hu-ac), 60%, 98%);
-    --bg-li-ba: hsla(var(--hu-ba), 40%, 90%);
-    --bg-li-di: hsla(var(--hu-di), 20%, 80%);
-    --bg-li-tr: hsla(var(--hu-di), 20%, 80%, var(--tr));
-    /* foreground light*/
-    --fg-li-ac: hsla(var(--hu-ac), 60%,  2%);
-    --fg-li-ba: hsla(var(--hu-ba), 40%, 20%);
-    --fg-li-di: hsla(var(--hu-di), 10%, 40%);
-    --fg-li-tr: hsla(var(--hu-di), 60%, 80%, var(--tr));
-    --fg-li-border: hsl(var(--hu-ac), 10%, 40%);
-
-    /* background dark */
-    --bg-da-ba: hsla(var(--hu-ba), 60%, 10%);
-    --bg-da-ac: hsla(var(--hu-di), 40%, 20%);
-    --bg-da-di: hsla(var(--hu-ac), 10%, 20%);
-    --bg-da-tr: hsla(var(--hu-ac), 20%, 20%, var(--tr));
-    /* foreground dark */
-    --fg-da-ac: hsl(var(--hu-di), 40%, 90%);
-    --fg-da-ba: hsl(var(--hu-ba), 20%, 98%);
-    --fg-da-di: hsl(var(--hu-ac), 10%, 80%);
-    --fg-da-tr: hsla(var(--hu-ac), 60%, 80%, var(--tr));
-    --fg-da-border: hsl(var(--hu-ac), 10%, 60%);
-
-    /* btn light */
-    --btn-li-ba   : hsl(var(--hu-btn), 80%, 60%);
-    --btn-li-hover: hsl(var(--hu-btn), 40%, 40%);
-    --btn-li-text  : hsla(var(--hu-btn), 10%, 100%);
-    /* btn dark */
-    --btn-da-ba   : hsl(var(--hu-btn), 80%, 40%);
-    --btn-da-hover: hsl(var(--hu-btn), 40%, 60%);
-    --btn-da-text : hsl(var(--hu-btn), 10%, 100%);
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: hsl(168, 30%, 96%);
+        --background: hsl(160, 0%, 4%);
+        --primary: hsl(167, 45%, 47%);
+        --secondary: hsl(167, 54%, 28%);
+        --accent: hsl(167, 64%, 38%);
+    }
 }
 
 
 * {
     border-radius: 0.4em;
     font-family: Arial, sans-serif;
-    color: var(--fg-li-ba);
+    transition: background-color 0.2s, color 0.2s;
 
     /* DEBUG */
     /* padding: var(--spacing-major); 
     border: red 1px solid; */
 }
-@media (prefers-color-scheme: dark) {
-    * {
-        color: var(--fg-da-ba);
-    }
-}
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, 
+p {
     margin: var(--spacing-minor);
+    color: var(--text);
 }
 
 body {
+    background-color: var(--background);
     background-image: url('');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    background-size: cover; /* Välj 'cover' eller 'contain' */
+    background-size: cover;
+    /* Välj 'cover' eller 'contain' */
     margin: var(--spacing-minor);
     padding: var(--spacing-major);
     display: flex;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 input {
     border: 1px solid;
-    outline-color: var(--fg-li-border);
+    outline-color: var(--secondary);
     background-color: transparent;
     padding: var(--spacing-major);
     margin: var(--spacing-minor);
 }
 
 
-input[type=text], input[type=password]{
+input[type=text],
+input[type=password] {
     width: 90%;
 }
 
 ::placeholder {
-    color: var(--fg-li-di);
+    color: var(--dimini);
 }
 
-@media (prefers-color-scheme: dark) {
-    ::placeholder {
-        color: var(--fg-da-di);
-    } 
-}
-#leftPane, #rightPane {
+
+#leftPane,
+#rightPane {
     width: 16vw;
     transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     overflow: hidden;
 }
-#leftPane.closed, #rightPane.closed {
+
+#leftPane.closed,
+#rightPane.closed {
     width: 1.6vw;
 }
 
@@ -127,9 +111,8 @@ input[type=text], input[type=password]{
 }
 
 #addCollection {
-    background-color: var(--btn-da-ba);
+    background-color: var(--primary);
     border: none;
-    color: var(--btn-li-text);
     padding: var(--spacing-major);
     text-align: center;
     text-decoration: none;
@@ -137,18 +120,11 @@ input[type=text], input[type=password]{
 
     margin: var(--spacing-minor);
     cursor: pointer;
-    transition: background-color 0.3s;
+
 }
+
 #addCollection:hover {
-    background-color: var(--btn-li-hover);
-}
-@media (prefers-color-scheme: dark) {
-    #addCollection {
-        color: var(--btn-da-text);
-    }
-    #addCollection:hover {
-        background-color: var(--btn-da-hover);
-    }
+    background-color: var(--accent);
 }
 
 .collection-header {
@@ -157,10 +133,12 @@ input[type=text], input[type=password]{
     align-items: center;
     margin-bottom: var(--spacing-major);
 }
+
 .collection-title-area {
     display: flex;
     align-items: center;
 }
+
 .bookmarks {
     display: flex;
     flex-wrap: wrap;
@@ -169,13 +147,15 @@ input[type=text], input[type=password]{
     gap: var(--spacing-major);
     min-height: 2em;
 }
+
 .bookmark {
+    color: var(--text);
     border: 1px solid;
-    border-color: var(--fg-li-border);
+    border-color: var(--dimini);
     padding: var(--spacing-major);
     min-width: 2em;
     min-height: 8vh;
-    background-color: var(--bg-li-ba);
+    background-color: var(--background);
     backdrop-filter: blur(1px);
     position: relative;
     cursor: pointer;
@@ -187,15 +167,18 @@ input[type=text], input[type=password]{
     transition: transform 0.2s ease, opacity 0.2s ease;
     will-change: transform, opacity;
 }
+
 .bookmark:hover {
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 .bookmark img {
     max-width: 2em;
     max-height: 2em;
     object-fit: contain;
     aspect-ratio: 1 / 1;
 }
+
 .bookmark h3 {
     margin: var(--spacing-minor);
     font-size: 1em;
@@ -203,6 +186,7 @@ input[type=text], input[type=password]{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .bookmark p {
     font-size: 0.8em;
     margin: var(--spacing-minor);
@@ -212,6 +196,7 @@ input[type=text], input[type=password]{
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
 .bookmark .edit-icon,
 .bookmark .delete-icon {
     position: absolute;
@@ -219,35 +204,28 @@ input[type=text], input[type=password]{
     opacity: 0;
     transition: opacity 0.3s;
 }
+
 .bookmark .edit-icon {
-    right: 2em;
+    right: 2.4em;
 }
+
 .bookmark .delete-icon {
     right: 1em;
 }
+
 .bookmark:hover .edit-icon,
 .bookmark:hover .delete-icon {
     opacity: 1;
 }
+
 .drag-handle {
     cursor: move;
     padding: var(--spacing-major);
     margin-right: 10px;
-    background-color: var(--fg-li-ac);
-    color: var(--bg-li-ba); /* Mörk färg för ljust läge */
-    border: var(--fg-li-border);
-}
-
-@media (prefers-color-scheme: dark) {
-    .drag-handle {
-    background-color: var(--bg-da-ba); /* Mörkare bakgrund för mörkt läge */
-    color: var(--fg-li-ba); /* Ljusare text för mörkt läge */
-    border: var(--fg-li-border);
-    }
-    .dragging {
-    opacity: 0.3;
-    transform: scale(0.95);
-    }
+    background-color: var(--background);
+    color: var(--secondary);
+    /* Mörk färg för ljust läge */
+    border: var(--dimini);
 }
 
 .collection-actions {
@@ -256,9 +234,11 @@ input[type=text], input[type=password]{
     opacity: 0;
     transition: opacity 0.3s;
 }
+
 .collection:hover .collection-actions {
     opacity: 1;
 }
+
 .collection-button {
     padding: var(--spacing-major);
     cursor: pointer;
@@ -266,15 +246,17 @@ input[type=text], input[type=password]{
     font-size: 14px;
     transition: background-color 0.3s, color 0.3s;
 }
+
 .toggle-collection {
-    color: #333;
+    color: var(--text);
     background: none;
     border: none;
     font-size: 1em;
     cursor: pointer;
     padding: var(--spacing-major);
     margin: var(--spacing-minor);
-    transition: transform 0.3s ease; /* NY egenskap */
+    transition: transform 0.3s ease;
+    /* NY egenskap */
 }
 
 .collection.is-open .toggle-collection {
@@ -292,131 +274,123 @@ input[type=text], input[type=password]{
         font-size: 18px;
         cursor: pointer;
         padding: var(--spacing-major);
-        color: #fff; /* Ljus färg för mörkt läge */
+        color: var(--text);
+        /* Ljus färg för mörkt läge */
     }
 }
+
 .add-bookmark {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary);
+    color: var(--text);
 }
+
 .add-bookmark:hover {
-    background-color: #45a049;
+    background-color: var(--accent);
 }
+
 .edit-collection {
-    background-color: #555555;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--text);
 }
+
 .edit-collection:hover {
-    background-color: #444444;
+    background-color: var(--accent);
 }
+
 .move-collection {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--secondary);
+    color: var(--text);
 }
+
 .move-collection:hover {
-    background-color: #e0e0e0;
+    background-color: var(--accent);
 }
+
 .delete-collection {
-    background-color: #f44336;
+    background-color: var(--delete);
     color: white;
 }
+
 .delete-collection:hover {
-    background-color: #da190b;
+    background-color: var(--delete-hover);
 }
+
 .empty-collection-message {
     padding: var(--spacing-major);
     text-align: center;
-    background-color: #f0f0f0;
-    border: 2px dashed #ccc;
+    background-color: var(--background);
+    border: 2px dashed var(--dimini);
     margin-top: 10px;
     width: 100%;
 }
+
 .drag-over {
-    background-color: #e0e0e0;
-    border: 2px dashed #666;
+    background-color: var(--background);
+    border: 2px dashed var(--secondary);
 }
+
 .window-title {
     cursor: pointer;
     padding: var(--spacing-major);
-    background-color: #f0f0f0;
+    background-color: var(--background);
     margin-bottom: 5px;
 }
+
 .tabs-list {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     white-space: normal;
 }
+
 .tab {
     display: flex;
     align-items: center;
     padding: var(--spacing-major);
     cursor: move;
 }
+
 .tab img {
     width: 16px;
     height: 16px;
     margin-right: 10px;
 }
+
 .tab-title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 #settings {
     margin-bottom: 20px;
     padding: var(--spacing-major);
-    background-color: rgba(240, 240, 240, 0.3);
-    backdrop-filter: blur(8px);
+    background-color: var(--background);
+    backdrop-filter: blur(4px);
 }
+
 .pane-toggle {
     cursor: pointer;
     padding: var(--spacing-major);
-    background-color: rgba(240, 240, 240, 0.3);
+    background-color: var(--background);
     margin-bottom: 10px;
 }
+
 .bookmark.drag-over {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
+
 .bookmark.dragging {
     opacity: 0.5;
     transform: scale(0.98);
 }
-@media (prefers-color-scheme: dark) {
-    body {
-        /*background-color: rgba(26, 26, 26, 0.3);*/
-        color: var(--fg-da-ba);
-        background-color: var(--bg-da-ba);
-    }
-    .collection {
-        background-color: rgba(42, 42, 42, 0.3);
-        border-color: rgba(4, 4, 4, 0.3);
-    }
-    .bookmark {
-        background-color: rgba(3, 3, 3, 0.3);
-        border-color: rgba(5, 5, 5, 0.3);
-    }
-    .window-title,
-    #settings,
-    .pane-toggle {
-        background-color: rgba(42, 42, 42, 0.6);
-    }
-    .collection-button {
-        background-color: rgba(4, 4, 4, 0.6);
-        color: #fff;
-    }
-    .add-bookmark {
-        background-color: #2e7d32;
-    }
-    .delete-collection {
-        background-color: #c62828;
-    }
-}
+
 .hidden {
     display: none !important;
 }
+
 #topBar {
     display: flex;
     justify-content: space-between;
@@ -424,7 +398,7 @@ input[type=text], input[type=password]{
     margin-bottom: 2em;
     position: sticky;
     top: 0;
-    z-index: 10; 
+    z-index: 10;
     backdrop-filter: blur(16px);
 }
 
@@ -445,128 +419,125 @@ input[type=text], input[type=password]{
 #supportButton:hover {
     background-color: #E56E2E;
 }
+
 @media (prefers-color-scheme: dark) {
     #supportButton {
         background-color: rgba(255, 155, 94, 0.3);
         color: #1a1a1a;
     }
+
     #supportButton:hover {
         background-color: rgba(255, 179, 129, 0.3);
     }
 }
+
 .import-button {
     display: inline-block;
     padding: var(--spacing-major);
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary);
+    color: var(--text);
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: var(--spacing-minor); /* Lägg till marginaler */
+    margin: var(--spacing-minor);
+    /* Lägg till marginaler */
 }
 
 .delete-button {
-    background-color: #f44336; /* Röd färg för delete-knappen */
+    background-color: var(--delete);
+    /* Röd färg för delete-knappen */
 }
 
 .delete-button:hover {
-    background-color: #d32f2f; /* Mörkare röd vid hover */
+    background-color: var(--delete-hover);
+    /* Mörkare röd vid hover */
 }
-@media (prefers-color-scheme: dark) {
-    .delete-button {
-        background-color: #c62828; /* Mörkare röd i dark mode */
-    }
 
-    .delete-button:hover {
-        background-color: #b71c1c; /* Ännu mörkare röd vid hover i dark mode */
-    }
+.import-button {
+    background-color: var(--primary);
 }
 .import-button:hover {
-    background-color: #45a049;
-}
-
-@media (prefers-color-scheme: dark) {
-    .import-button {
-        background-color: #2e7d32;
-    }
-
-    .import-button:hover {
-        background-color: #1b5e20;
-    }
+    background-color: var(--accent);
 }
 
 a[href="https://kodar.ninja"] {
-    color: #0066cc; /* A standard blue color for links */
-    text-decoration: none; /* Removes the underline */
-    transition: color 0.3s ease; /* Smooth transition for hover effect */
+    color: #0066cc;
+    /* A standard blue color for links */
+    text-decoration: none;
+    /* Removes the underline */
+    transition: color 0.3s ease;
+    /* Smooth transition for hover effect */
 }
 
 a[href="https://kodar.ninja"]:hover {
-    color: #004499; /* Slightly darker blue on hover */
-    text-decoration: underline; /* Adds underline on hover */
+    color: #004499;
+    /* Slightly darker blue on hover */
+    text-decoration: underline;
+    /* Adds underline on hover */
 }
 
 /* Styles for the link in dark mode */
 @media (prefers-color-scheme: dark) {
     a[href="https://kodar.ninja"] {
-        color: #66b3ff; /* Light blue color for better visibility in dark mode */
+        color: #66b3ff;
+        /* Light blue color for better visibility in dark mode */
     }
 
     a[href="https://kodar.ninja"]:hover {
-        color: #99ccff; /* Slightly lighter blue on hover in dark mode */
-    }
-}
-.placeholder {
-    background: rgba(100, 100, 100, 0.2);
-    border: 2px dashed #666;
-    margin: var(--spacing-minor);
-    transition: all 0.15s ease;
-}
-@media (prefers-color-scheme: dark) {
-        .placeholder {
-        border-color: #666;
-        background-color: rgba(255, 255, 255, 0.05);
+        color: #99ccff;
+        /* Slightly lighter blue on hover in dark mode */
     }
 }
 
+.placeholder {
+    background-color: var(--secondary);
+    border: 2px dashed;
+    border-color: var(--dimini);
+    margin: var(--spacing-minor);
+    transition: all 0.15s ease;
+}
+
 .collection {
-    border: 1px solid #ccc;
+    border: 1px solid;
+    border-color: var(--dimini);
     margin-bottom: 20px;
     padding: var(--spacing-major);
-    background: rgba(255, 255, 255, 0.35);
+    background: var(--background);
     backdrop-filter: blur(8px);
-    transition: all 0.3s ease; /* Uppdaterad från ingen transition */
+    transition: all 0.3s ease;
+    /* Uppdaterad från ingen transition */
 }
 
 .collection.dragging {
     opacity: 0.5;
     transform: scale(0.98);
-}   
+}
 
 .collection.is-open {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
-                0 8px 16px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.05);
     transform: translateY(-2px);
-    border-color: #bbb;
+    border-color: var(--dimini);
 }
 
 .collection:not(.is-open) {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 4px 8px rgba(0, 0, 0, 0.05);
+        inset 0 4px 8px rgba(0, 0, 0, 0.05);
     transform: translateY(1px);
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--background);
     backdrop-filter: blur(1px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid;
+    border-color: var(--dimini);
 }
 
 .collection:hover {
-    border-color: #999;
+    border-color: var(--accent);
 }
 
 @media (prefers-color-scheme: dark) {
     .collection.is-open {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
-                    0 8px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+            0 8px 16px rgba(0, 0, 0, 0.2);
         border-color: #555;
         transform: translateY(-2px);
         background: rgba(42, 42, 42, 0.35);
@@ -575,18 +546,18 @@ a[href="https://kodar.ninja"]:hover {
 
     .collection:not(.is-open) {
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-                    inset 0 4px 8px rgba(0, 0, 0, 0.2);
+            inset 0 4px 8px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
         background: rgba(21, 21, 21, 0.35);
         /*background-color: #151515;*/
     }
 
     .collection:hover {
-        border-color: #666;            
+        border-color: #666;
     }
 }
 
-/* GitHub sync styles - lägg till i style-taggen */
+/* GitHub sync styles - lägg till i style-taggen
 #githubSettings {
     margin-top: 20px;
     padding-top: 20px;
@@ -598,32 +569,34 @@ a[href="https://kodar.ninja"]:hover {
     padding: var(--spacing-major);
     margin-bottom: 10px;
     border: 1px solid #ddd;
-}
+} */
 
 #syncButton {
-    background-color: rgba(46, 164, 79, 0.35) ;
+    background-color: var(--primary);
     backdrop-filter: blur(8px);
-    color: white;
+    color: var(--text);
     border: none;
     padding: var(--spacing-major);
     cursor: pointer;
     justify-self: flex-start;
-    /* display: flex;
+    display: flex;
     align-items: center;
-    justify-content: center; */
-    margin: var(--spacing-minor)
+    justify-content: center;
+    min-width: 2em;
+    min-height: 2em;
 }
 
 #syncButton svg {
-    width: 20px;
-    height: 20px;
+    width: 1em;
+    height: 1em;
+    aspect-ratio: 1 / 1;
 }
 
 #syncButton.syncing {
-    background-color: rgba(46, 164, 79, 0.35);
+    background-color: var(--accent);
     backdrop-filter: blur(8px);
 
-    background-color: #238636;
+    background-color: var(--secondary);
     pointer-events: none;
 }
 
@@ -632,28 +605,12 @@ a[href="https://kodar.ninja"]:hover {
 }
 
 @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-@media (prefers-color-scheme: dark) {
-    #githubSettings {
-        border-color: #444;
+    from {
+        transform: rotate(0deg);
     }
 
-    #githubSettings input {
-        background-color: #333;
-        border-color: #555;
-        color: white;
-    }
-
-    #syncButton {
-        background-color: rgba(35, 134, 54, 0.35);
-        backdrop-filter: blur(8px);
-    }
-
-    #syncButton.syncing {
-        background-color: rgba(26, 97, 39, 0.35);
-        backdrop-filter: blur(8px);
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -686,45 +643,40 @@ a[href="https://kodar.ninja"]:hover {
     max-width: 40vw;
     min-height: 2em;
     height: max-content;
-    background-color:rgba(255, 255, 255, 0.35);
-   
+    background-color: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
     flex-grow: 10;
 }
 
-@media (max-width: 1024px) {
-    #searchBox {
-        display: none;
-    }
-}
-@media (prefers-color-scheme: dark) {
-    #searchBox {
-        background-color:rgba(3, 3, 3, 0.65);
-        color: white;
-        border-color: #555;
-        backdrop-filter: blur(8px);
-    }
-}
-
 #backgroundThumbnails {
-    display: flex; /* Eller 'grid' för mer avancerad layout */
-    flex-wrap: wrap; /* Om miniatyrerna ska radbrytas */
-    gap: 10px; /* Mellanrum mellan miniatyrerna */
+    display: flex;
+    /* Eller 'grid' för mer avancerad layout */
+    flex-wrap: wrap;
+    /* Om miniatyrerna ska radbrytas */
+    gap: 10px;
+    /* Mellanrum mellan miniatyrerna */
     margin-top: 10px;
 }
 
 .background-thumbnail {
-    width: 50px; /* Justera storleken efter behov */
+    width: 50px;
+    /* Justera storleken efter behov */
     height: 50px;
-    border: 2px solid transparent; /* Tunn ram som standard */
+    border: 2px solid transparent;
+    /* Tunn ram som standard */
     cursor: pointer;
-    object-fit: cover; /* Se till att bilden täcker miniatyr-ytan */
-    transition: border-color 0.3s; /* Mjuk övergång för border-color */
+    object-fit: cover;
+    /* Se till att bilden täcker miniatyr-ytan */
+    transition: border-color 0.3s;
+    /* Mjuk övergång för border-color */
 }
 
 .background-thumbnail:hover,
 .background-thumbnail.selected {
-    border-color: #007bff; /* Exempel på färg för markerad/hover */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Valfri skuggeffekt */
+    border-color: #007bff;
+    /* Exempel på färg för markerad/hover */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    /* Valfri skuggeffekt */
 }
 
 .tab-group-container {
@@ -735,24 +687,28 @@ a[href="https://kodar.ninja"]:hover {
     margin-top: 10px;
 }
 
-.group-drag-handle{
+.group-drag-handle {
     font-weight: bold;
     margin-bottom: 5px;
 }
+
 .group-title {
     font-weight: bold;
     margin-bottom: 5px;
 }
+
 .group-tabs {
     display: flex;
-    flex-direction: column; /* Varje tabb på en egen rad */
+    flex-direction: column;
+    /* Varje tabb på en egen rad */
     white-space: nowrap;
     gap: 10px;
 }
 
 .ungrouped-tabs {
     display: flex;
-    flex-direction: column; /* Varje tabb på en egen rad */
+    flex-direction: column;
+    /* Varje tabb på en egen rad */
     gap: 10px;
     overflow-x: auto;
     white-space: nowrap;
@@ -767,8 +723,8 @@ a[href="https://kodar.ninja"]:hover {
 
 .create-collection-btn {
     display: none;
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary);
+    color: var(--text);
     border: none;
     padding: var(--spacing-major);
     cursor: pointer;
